@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1stCRM 주간 리포트 · 2026.09.07</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#F5F7FB;
+    --surface:#FFFFFF;
+    --surface-2:#EDF1F7;
+    --border:#DEE3ED;
+    --ink:#101A2E;
+    --ink-strong:#03153B;
+    --muted:#5B6478;
+    --accent:#1070FC;
+    --accent-text:#0C56C2;
+    --good-bg:#E3F5EC;
+    --good-text:#137A4C;
+    --prog-bg:#E8F1FF;
+    --prog-text:#0C56C2;
+    --gold:#E0A32E;
+    --navy:#03153B;
+    --shadow: 0 1px 2px rgba(3,21,59,0.04);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A1220;
+      --surface:#101B2E;
+      --surface-2:#16233C;
+      --border:#22314C;
+      --ink:#E7EAF2;
+      --ink-strong:#FFFFFF;
+      --muted:#95A2BC;
+      --accent:#4C93FF;
+      --accent-text:#7FB0FF;
+      --good-bg:#123423;
+      --good-text:#4ADE94;
+      --prog-bg:#132846;
+      --prog-text:#7FB0FF;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A1220;
+    --surface:#101B2E;
+    --surface-2:#16233C;
+    --border:#22314C;
+    --ink:#E7EAF2;
+    --ink-strong:#FFFFFF;
+    --muted:#95A2BC;
+    --accent:#4C93FF;
+    --accent-text:#7FB0FF;
+    --good-bg:#123423;
+    --good-text:#4ADE94;
+    --prog-bg:#132846;
+    --prog-text:#7FB0FF;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans KR', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size:15px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace; }
+
+  a{ color:var(--accent-text); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  .masthead{
+    background:#03153B;
+    padding:22px max(20px, calc(50% - 490px));
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .masthead .logo{ height:22px; width:auto; display:block; flex:none; }
+  .masthead .brand-meta{ text-align:right; }
+  .masthead .eyebrow{
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:0.14em;
+    color:#E0A32E;
+    text-transform:uppercase;
+    margin:0 0 3px;
+  }
+  .masthead .client{
+    font-size:15px;
+    font-weight:600;
+    color:#FFFFFF;
+    margin:0;
+    letter-spacing:0.01em;
+  }
+
+  .layout{
+    max-width:1020px;
+    margin:0 auto;
+    padding:0 20px;
+    display:flex;
+    align-items:flex-start;
+    gap:32px;
+  }
+  .history-sidebar{
+    width:190px;
+    flex:none;
+    position:sticky;
+    top:24px;
+    padding:32px 0 40px;
+  }
+  .history-title{
+    font-family:'IBM Plex Mono', ui-monospace, monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 12px;
+  }
+  .history-list{ display:flex; flex-direction:column; gap:2px; }
+  .history-link{
+    display:block;
+    padding:7px 10px;
+    border-radius:8px;
+    font-size:13px;
+    font-family:'IBM Plex Mono', ui-monospace, monospace;
+    color:var(--muted);
+  }
+  .history-link:hover{ background:var(--surface-2); text-decoration:none; }
+  .history-link.active{
+    background:var(--surface-2);
+    color:var(--ink-strong);
+    font-weight:600;
+  }
+  .history-empty{ font-size:12.5px; color:var(--muted); }
+  .content-col{ flex:1; min-width:0; }
+
+  main{
+    max-width:780px;
+    padding:40px 0 24px;
+  }
+
+  header.report-head h1{
+    font-size:clamp(24px, 4vw, 30px);
+    font-weight:700;
+    color:var(--ink-strong);
+    margin:0 0 8px;
+    text-wrap:balance;
+    letter-spacing:-0.01em;
+  }
+  header.report-head .period{
+    margin:0 0 24px;
+    color:var(--muted);
+    font-size:14px;
+  }
+  header.report-head .period .sep{ margin:0 8px; opacity:0.6; }
+
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:36px;
+    box-shadow:var(--shadow);
+  }
+  .stat{
+    background:var(--surface);
+    padding:16px 18px;
+  }
+  .stat .label{
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 6px;
+  }
+  .stat .value{
+    font-size:18px;
+    font-weight:600;
+    color:var(--ink-strong);
+    margin:0;
+    font-variant-numeric:tabular-nums;
+  }
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:3px 10px 3px 8px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+  }
+  .pill.good{ background:var(--good-bg); color:var(--good-text); }
+  .pill.good::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--good-text); }
+
+  section{ margin-bottom:36px; }
+  section:last-of-type{ margin-bottom:0; }
+
+  h2.section-head{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-family:'IBM Plex Mono', ui-monospace, monospace;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:var(--ink-strong);
+    margin:0 0 14px;
+  }
+  h2.section-head::before{
+    content:"";
+    width:9px; height:9px;
+    background:var(--accent);
+    flex:none;
+  }
+
+  .summary-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px 22px;
+    box-shadow:var(--shadow);
+  }
+  .summary-card p{ margin:0; color:var(--ink); }
+
+  .table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--surface);
+    min-width:520px;
+  }
+  thead th{
+    text-align:left;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    background:var(--surface-2);
+    padding:11px 16px;
+    border-bottom:1px solid var(--border);
+  }
+  tbody td{
+    padding:13px 16px;
+    border-bottom:1px solid var(--border);
+    vertical-align:top;
+    font-size:14.5px;
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.area{ color:var(--muted); font-size:13px; white-space:nowrap; font-family:'IBM Plex Mono', monospace; }
+  td.status{ white-space:nowrap; }
+  td ol, td ul{ margin:0; padding-left:18px; }
+  td li + li{ margin-top:4px; }
+  td .note{ display:block; margin-top:8px; font-size:12.5px; color:var(--muted); }
+
+  .risk-list{ display:flex; flex-direction:column; gap:10px; }
+  .risk-item{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-left:3px solid var(--gold);
+    border-radius:0 10px 10px 0;
+    padding:14px 18px;
+    box-shadow:var(--shadow);
+  }
+  .risk-item p{ margin:0; color:var(--ink); font-size:14.5px; }
+  .risk-item .tag{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#9A6B14;
+    margin-bottom:5px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .risk-item .tag{ color:var(--gold); }
+  }
+  :root[data-theme="dark"] .risk-item .tag{ color:var(--gold); }
+
+  .ask-card{
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px 22px;
+  }
+  .ask-card p{ margin:0; color:var(--ink); }
+  .ask-card ol > li + li{ margin-top:8px; }
+
+  footer{
+    max-width:780px;
+    padding:28px 0 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    border-top:1px solid var(--border);
+  }
+  footer .symbol{ height:16px; width:auto; flex:none; opacity:0.85; }
+  footer .note{ color:var(--muted); font-size:12.5px; }
+  footer .note strong{ color:var(--ink); font-weight:600; }
+
+  @media (max-width: 860px){
+    .layout{ flex-direction:column; gap:0; }
+    .history-sidebar{
+      width:100%;
+      position:static;
+      padding:16px 0;
+      border-bottom:1px solid var(--border);
+    }
+    .history-list{ flex-direction:row; overflow-x:auto; gap:6px; }
+    .history-link{ white-space:nowrap; }
+  }
+  @media (max-width: 480px){
+    .masthead{ padding:18px 16px; }
+    .layout{ padding:0 16px; }
+    thead th, tbody td{ padding:10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <svg class="logo" viewBox="56 49 1639.6 306.6" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cofoundary">
+    <path d="M1695.6 113.8L1596.6 355.6H1568.4L1600.8 276.4L1534.5 113.8H1564.8L1616.4 247L1667.4 113.8H1695.6Z" fill="#FFFFFF"/>
+    <path d="M1469.38 140.5C1474.18 131.1 1480.98 123.8 1489.78 118.6C1498.78 113.4 1509.68 110.8 1522.48 110.8V139H1515.28C1484.68 139 1469.38 155.6 1469.38 188.8V278.2H1442.08V113.8H1469.38V140.5Z" fill="#FFFFFF"/>
+    <path d="M1247.15 195.4C1247.15 178.6 1250.55 163.9 1257.35 151.3C1264.15 138.5 1273.45 128.6 1285.25 121.6C1297.25 114.6 1310.55 111.1 1325.15 111.1C1339.55 111.1 1352.05 114.2 1362.65 120.4C1373.25 126.6 1381.15 134.4 1386.35 143.8V113.8H1413.95V278.2H1386.35V247.6C1380.95 257.2 1372.85 265.2 1362.05 271.6C1351.45 277.8 1339.05 280.9 1324.85 280.9C1310.25 280.9 1297.05 277.3 1285.25 270.1C1273.45 262.9 1264.15 252.8 1257.35 239.8C1250.55 226.8 1247.15 212 1247.15 195.4ZM1386.35 195.7C1386.35 183.3 1383.85 172.5 1378.85 163.3C1373.85 154.1 1367.05 147.1 1358.45 142.3C1350.05 137.3 1340.75 134.8 1330.55 134.8C1320.35 134.8 1311.05 137.2 1302.65 142C1294.25 146.8 1287.55 153.8 1282.55 163C1277.55 172.2 1275.05 183 1275.05 195.4C1275.05 208 1277.55 219 1282.55 228.4C1287.55 237.6 1294.25 244.7 1302.65 249.7C1311.05 254.5 1320.35 256.9 1330.55 256.9C1340.75 256.9 1350.05 254.5 1358.45 249.7C1367.05 244.7 1373.85 237.6 1378.85 228.4C1383.85 219 1386.35 208.1 1386.35 195.7Z" fill="#FFFFFF"/>
+    <path d="M1058.41 195.4C1058.41 178.6 1061.81 163.9 1068.61 151.3C1075.41 138.5 1084.71 128.6 1096.51 121.6C1108.51 114.6 1121.91 111.1 1136.71 111.1C1149.51 111.1 1161.41 114.1 1172.41 120.1C1183.41 125.9 1191.81 133.6 1197.61 143.2V56.2002H1225.21V278.2H1197.61V247.3C1192.21 257.1 1184.21 265.2 1173.61 271.6C1163.01 277.8 1150.61 280.9 1136.41 280.9C1121.81 280.9 1108.51 277.3 1096.51 270.1C1084.71 262.9 1075.41 252.8 1068.61 239.8C1061.81 226.8 1058.41 212 1058.41 195.4ZM1197.61 195.7C1197.61 183.3 1195.11 172.5 1190.11 163.3C1185.11 154.1 1178.31 147.1 1169.71 142.3C1161.31 137.3 1152.01 134.8 1141.81 134.8C1131.61 134.8 1122.31 137.2 1113.91 142C1105.51 146.8 1098.81 153.8 1093.81 163C1088.81 172.2 1086.31 183 1086.31 195.4C1086.31 208 1088.81 219 1093.81 228.4C1098.81 237.6 1105.51 244.7 1113.91 249.7C1122.31 254.5 1131.61 256.9 1141.81 256.9C1152.01 256.9 1161.31 254.5 1169.71 249.7C1178.31 244.7 1185.11 237.6 1190.11 228.4C1195.11 219 1197.61 208.1 1197.61 195.7Z" fill="#FFFFFF"/>
+    <path d="M967.821 110.8C987.821 110.8 1004.02 116.9 1016.42 129.1C1028.82 141.1 1035.02 158.5 1035.02 181.3V278.2H1008.02V185.2C1008.02 168.8 1003.92 156.3 995.721 147.7C987.521 138.9 976.321 134.5 962.121 134.5C947.721 134.5 936.221 139 927.621 148C919.221 157 915.021 170.1 915.021 187.3V278.2H887.721V113.8H915.021V137.2C920.421 128.8 927.721 122.3 936.921 117.7C946.321 113.1 956.621 110.8 967.821 110.8Z" fill="#FFFFFF"/>
+    <path d="M860.626 113.8V278.2H833.326V253.9C828.126 262.3 820.826 268.9 811.426 273.7C802.226 278.3 792.026 280.6 780.826 280.6C768.026 280.6 756.526 278 746.326 272.8C736.126 267.4 728.026 259.4 722.026 248.8C716.226 238.2 713.326 225.3 713.326 210.1V113.8H740.326V206.5C740.326 222.7 744.426 235.2 752.626 244C760.826 252.6 772.026 256.9 786.226 256.9C800.826 256.9 812.326 252.4 820.726 243.4C829.126 234.4 833.326 221.3 833.326 204.1V113.8H860.626Z" fill="#FFFFFF"/>
+    <path d="M611.63 280.9C596.23 280.9 582.23 277.4 569.63 270.4C557.23 263.4 547.43 253.5 540.23 240.7C533.23 227.7 529.73 212.7 529.73 195.7C529.73 178.9 533.33 164.1 540.53 151.3C547.93 138.3 557.93 128.4 570.53 121.6C583.13 114.6 597.23 111.1 612.83 111.1C628.43 111.1 642.53 114.6 655.13 121.6C667.73 128.4 677.63 138.2 684.83 151C692.23 163.8 695.93 178.7 695.93 195.7C695.93 212.7 692.13 227.7 684.53 240.7C677.13 253.5 667.03 263.4 654.23 270.4C641.43 277.4 627.23 280.9 611.63 280.9ZM611.63 256.9C621.43 256.9 630.63 254.6 639.23 250C647.83 245.4 654.73 238.5 659.93 229.3C665.33 220.1 668.03 208.9 668.03 195.7C668.03 182.5 665.43 171.3 660.23 162.1C655.03 152.9 648.23 146.1 639.83 141.7C631.43 137.1 622.33 134.8 612.53 134.8C602.53 134.8 593.33 137.1 584.93 141.7C576.73 146.1 570.13 152.9 565.13 162.1C560.13 171.3 557.63 182.5 557.63 195.7C557.63 209.1 560.03 220.4 564.83 229.6C569.83 238.8 576.43 245.7 584.63 250.3C592.83 254.7 601.83 256.9 611.63 256.9Z" fill="#FFFFFF"/>
+    <path d="M528.1 136.3H493.6V278.2H466.3V136.3H445V113.8H466.3V102.1C466.3 83.7 471 70.3 480.4 61.9C490 53.3 505.3 49 526.3 49V71.8C514.3 71.8 505.8 74.2 500.8 79C496 83.6 493.6 91.3 493.6 102.1V113.8H528.1V136.3Z" fill="#FFFFFF"/>
+    <path d="M348.072 149.051C324.737 149.051 305.82 170.532 305.82 197.03C305.82 223.529 324.737 245.011 348.072 245.011C371.042 245.011 389.731 224.195 390.309 198.269L390.323 197.03H430.425C430.425 213.318 425.595 229.241 416.546 242.784C407.497 256.327 394.635 266.883 379.587 273.116C364.539 279.349 347.98 280.98 332.005 277.803C316.03 274.625 301.356 266.781 289.838 255.264C278.321 243.746 270.477 229.072 267.299 213.097C264.122 197.122 265.753 180.563 271.986 165.515C278.219 150.467 288.775 137.605 302.318 128.556C315.861 119.506 331.783 114.677 348.072 114.677V149.051Z" fill="#FFFFFF"/>
+    <path d="M56 176.262C56 156.593 60.3922 139.024 69.1767 123.556C78.1521 107.897 90.2785 95.7701 105.556 87.1767C121.024 78.3922 138.306 74 157.403 74C179.746 74 199.32 79.729 216.125 91.187C232.93 102.645 244.675 118.495 251.359 138.738H205.24C200.657 129.189 194.164 122.028 185.762 117.254C177.55 112.48 168.002 110.093 157.117 110.093C145.468 110.093 135.06 112.862 125.894 118.4C116.918 123.747 109.852 131.385 104.696 141.316C99.7313 151.246 97.2487 162.895 97.2487 176.262C97.2487 189.439 99.7313 201.088 104.696 211.209C109.852 221.14 116.918 228.874 125.894 234.412C135.06 239.759 145.468 242.432 157.117 242.432C168.002 242.432 177.55 240.045 185.762 235.271C194.164 230.306 200.657 223.049 205.24 213.501H251.359C244.675 233.934 232.93 249.88 216.125 261.338C199.511 272.605 179.937 278.238 157.403 278.238C138.306 278.238 121.024 273.942 105.556 265.348C90.2785 256.564 78.1521 244.437 69.1767 228.969C60.3922 213.501 56 195.932 56 176.262Z" fill="#FFFFFF"/>
+    <path d="M353.084 114.829C362.185 115.384 371.142 117.447 379.587 120.945C389.578 125.084 398.657 131.151 406.304 138.798C413.951 146.445 420.018 155.524 424.156 165.516C427.654 173.96 429.718 182.917 430.272 192.018H390.094C388.058 169.75 372.611 152.006 353.084 149.385V114.829Z" fill="#1070FC"/>
+  </svg>
+  <div class="brand-meta">
+    <p class="eyebrow">Weekly Report</p>
+    <p class="client">1stCRM 프로젝트</p>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="history-sidebar">
+    <p class="history-title">지난 리포트</p>
+    <nav class="history-list" id="history-list">
+      <span class="history-empty">불러오는 중&hellip;</span>
+    </nav>
+  </aside>
+
+  <div class="content-col">
+    <main>
+      <header class="report-head">
+        <h1>1stCRM 프로젝트 주간 보고</h1>
+        <p class="period mono">2026.09.01 &ndash; 09.07<span class="sep">/</span>작성 기준일 2026.09.07</p>
+      </header>
+
+      <div class="stat-row">
+        <div class="stat">
+          <p class="label">보고 기간</p>
+          <p class="value mono">09.01&ndash;09.07</p>
+        </div>
+        <div class="stat">
+          <p class="label">핵심 마일스톤</p>
+          <p class="value">Stage 환경 구축&middot;QA 진행</p>
+        </div>
+        <div class="stat">
+          <p class="label">전체 상태</p>
+          <p class="value"><span class="pill good">정상 진행</span></p>
+        </div>
+      </div>
+
+      <section>
+        <h2 class="section-head">전체 요약</h2>
+        <div class="summary-card">
+          <p>Stage 환경 구축과 QA를 진행하고 DUR 코드 이전을 준비했으며, 디자인 시스템 적용도 함께 진행했습니다. 문자 발송 사업자 인증 문서 정리, 상용 서버 자동 재시작 등록, DB 백업 자동 정리 정책 적용 등 운영 안정화 작업도 마무리했습니다.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-head">지난주 완료 산출물</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>작업 영역</th><th>내용</th><th>상태</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="area">개발</td>
+                <td>
+                  <ol>
+                    <li>stage 환경 구축 및 QA 진행과 버그 수정</li>
+                    <li>DUR 코드 분석 및 이전 준비</li>
+                    <li>디자인 시스템 적용 (모달 영역 제외)</li>
+                  </ol>
+                  <span class="note">stage 환경: DB, Redis 등 환경은 상용 환경과 연결된 독립 서버</span>
+                </td>
+                <td class="status"><span class="pill" style="background:var(--prog-bg); color:var(--prog-text);">진행중</span></td>
+              </tr>
+              <tr>
+                <td class="area">디자인</td>
+                <td>디자인 시스템 제작 착수</td>
+                <td class="status"><span class="pill" style="background:var(--prog-bg); color:var(--prog-text);">진행중</span></td>
+              </tr>
+              <tr>
+                <td class="area">기획</td>
+                <td>현황 파악 및 경쟁 분석</td>
+                <td class="status"><span class="pill" style="background:var(--prog-bg); color:var(--prog-text);">진행중</span></td>
+              </tr>
+              <tr>
+                <td class="area">기타</td>
+                <td>
+                  <ol>
+                    <li>문자 사업자 인증 관련 문서 정리</li>
+                    <li>병원 데이터 추출 인계 문서 검토</li>
+                    <li>상용 서버(java) 자동 재시작 프로세스 등록 (11pm)</li>
+                    <li>DB 백업 자동 정리 정책 적용 (14일간 유지)</li>
+                    <li>상용 서버(java) 장애 대응</li>
+                  </ol>
+                </td>
+                <td class="status"><span class="pill good">완료</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-head">리스크 및 의존성</h2>
+        <div class="risk-list">
+          <div class="risk-item">
+            <span class="tag">방식 조정 &middot; 해소됨</span>
+            <p>당초 검토했던 Vue2&rarr;Vue3 단순 전환이 기술적으로 어려움이 확인되어 Next.js 전환으로 방식을 바꿨습니다. 영향은 9/1(월) 완료로 회복되어 현재 일정 지연은 없습니다.</p>
+          </div>
+          <div class="risk-item">
+            <span class="tag">확인 필요</span>
+            <p>전체 마이그레이션 목표 완료일에 대한 공식 기준 일정은 아직 별도 확인이 필요합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-head">이번 주 계획<span class="mono" style="font-weight:500; letter-spacing:0; text-transform:none; color:var(--muted); margin-left:4px;">(09.01&ndash;09.07)</span></h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>작업 영역</th><th>내용</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="area">개발 환경</td>
+                <td>
+                  <ol>
+                    <li>stage 환경 구축 및 QA 진행과 버그 수정</li>
+                    <li>DUR 코드 분석 및 이전</li>
+                    <li>병원 데이터 추출 스크립트 작성 및 추출 후 전달</li>
+                  </ol>
+                </td>
+              </tr>
+              <tr>
+                <td class="area">디자인</td>
+                <td>디자인 시스템 적용, 예약 화면 및 고객관리 모달 샘플 디자인</td>
+              </tr>
+              <tr>
+                <td class="area">연동 / QA</td>
+                <td>외부 연동 테스트 및 구축(프로덕션 전환 용이성 확보), 전체 서비스 QA (알림톡, 문자발송, 청구 관련)</td>
+              </tr>
+              <tr>
+                <td class="area">기획</td>
+                <td>9/2(화) 착수 미팅, 기획 온보딩 시작</td>
+              </tr>
+              <tr>
+                <td class="area">기타</td>
+                <td>문자 사업자 인증 관련 문서 전달 및 보완</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-head">요청사항</h2>
+        <div class="ask-card">
+          <ol style="margin:0; padding-left:18px; color:var(--ink);">
+            <li>DUR 관련 인수인계 업체 일정 확인 요청드립니다.</li>
+            <li>아래 외부 연동 QA 요청드립니다.
+              <ul style="margin:6px 0 0; padding-left:18px; color:var(--ink);">
+                <li>전자서명</li>
+                <li>네모닉 출력</li>
+                <li>이지콜/나우테스</li>
+                <li>이브렙</li>
+                <li>닥톡</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <svg class="symbol" viewBox="265.72 114.68 164.7 164.7" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cofoundary symbol">
+        <path d="M348.072 149.051C324.737 149.051 305.82 170.532 305.82 197.03C305.82 223.529 324.737 245.011 348.072 245.011C371.042 245.011 389.731 224.195 390.309 198.269L390.323 197.03H430.425C430.425 213.318 425.595 229.241 416.546 242.784C407.497 256.327 394.635 266.883 379.587 273.116C364.539 279.349 347.98 280.98 332.005 277.803C316.03 274.625 301.356 266.781 289.838 255.264C278.321 243.746 270.477 229.072 267.299 213.097C264.122 197.122 265.753 180.563 271.986 165.515C278.219 150.467 288.775 137.605 302.318 128.556C315.861 119.506 331.783 114.677 348.072 114.677V149.051Z" fill="var(--muted)"/>
+        <path d="M353.084 114.829C362.185 115.384 371.142 117.447 379.587 120.945C389.578 125.084 398.657 131.151 406.304 138.798C413.951 146.445 420.018 155.524 424.156 165.516C427.654 173.96 429.718 182.917 430.272 192.018H390.094C388.058 169.75 372.611 152.006 353.084 149.385V114.829Z" fill="var(--accent)"/>
+      </svg>
+      <p class="note">본 보고서는 매주 갱신됩니다 &middot; <strong>Cofoundary</strong> &times; 1stCRM</p>
+    </footer>
+  </div>
+</div>
+
+<script>
+  var CURRENT_FILE = "2026-09-07.html";
+  fetch('./manifest.json').then(function(r){ return r.json(); }).then(function(list){
+    var nav = document.getElementById('history-list');
+    nav.innerHTML = '';
+    if (!list || !list.length) { nav.innerHTML = '<span class="history-empty">기록 없음</span>'; return; }
+    list.forEach(function(item){
+      var a = document.createElement('a');
+      a.href = './' + item.file;
+      a.textContent = item.label;
+      a.className = 'history-link' + (item.file === CURRENT_FILE ? ' active' : '');
+      nav.appendChild(a);
+    });
+  }).catch(function(){
+    document.getElementById('history-list').innerHTML = '<span class="history-empty">기록을 불러오지 못했습니다</span>';
+  });
+</script>
+
+</body>
+</html>
+
