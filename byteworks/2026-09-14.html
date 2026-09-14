@@ -302,7 +302,7 @@
     <main>
       <header class="report-head">
         <h1>바이트웍스 프로젝트 주간 보고</h1>
-        <p class="period mono">2026.09.07 &ndash; 09.18<span> / </span>작성 기준일 2026.09.14</p>
+        <p class="period mono">2026.09.07 &ndash; 09.18<span> / </span>작성 기준일 2026.09.15</p>
       </header>
 
       <div class="stat-row">
@@ -312,7 +312,7 @@
         </div>
         <div class="stat">
           <p class="label">핵심 마일스톤</p>
-          <p class="value">직접PPA 기획 진행</p>
+          <p class="value">직접PPA 기획 착수</p>
         </div>
         <div class="stat">
           <p class="label">전체 상태</p>
@@ -323,7 +323,7 @@
       <section>
         <h2 class="section-head">전체 요약</h2>
         <div class="card">
-          <p>직접PPA 발전사업자 side 기획과 REC현물&middot;발전소 모니터링 관련 작업을 진행했습니다. 이번 주는 직접PPA 기획을 이어가며 뉴비즈 카나리 QA와 사용성 QA 계획서 작성을 진행합니다.</p>
+          <p>REC현물 이력 정리, 오솔라(뉴비즈) 청구 처리 및 사용성 QA 준비, 오솔라 운영 이슈 대응(13건 중 9건 완료)을 진행했습니다. 이번 주는 직접PPA 발전사업자 side 기획과 뉴비즈 가입 프로모션 기획, 사용성 QA 계획서 작성을 진행합니다.</p>
         </div>
       </section>
       <section>
@@ -334,9 +334,12 @@
               <tr><th>작업 영역</th><th>내용</th></tr>
             </thead>
             <tbody>
-              <tr><td class="area">직접PPA</td><td>기획 &mdash; 발전사업자 side</td></tr>
-              <tr><td class="area">REC현물</td><td>기획 &mdash; oldbiz 참고</td></tr>
-              <tr><td class="area">발전소 모니터링</td><td>PR 다듬기 &mdash; fallback</td></tr>
+              <tr><td class="area">REC현물</td><td>기획 &mdash; 현물 이력</td></tr>
+              <tr><td class="area">뉴비즈(오솔라)</td><td>기획 &mdash; 오솔라 청구</td></tr>
+              <tr><td class="area">뉴비즈</td><td>사용성 QA 준비</td></tr>
+              <tr><td class="area">오솔라 운영</td><td>REC 관련 수수료 등록 업무 진행</td></tr>
+              <tr><td class="area">오솔라 운영</td><td>대응 13건 &mdash; 9건 완료 / 3건 백로그화 / 1건 진행 중</td></tr>
+              <tr><td class="area">오솔라 운영 인수인계</td><td>오솔라 서비스 이용 흐름 및 retool 사용법 인수인계</td></tr>
             </tbody>
           </table>
         </div>
@@ -351,8 +354,10 @@
             </thead>
             <tbody>
               <tr><td class="area">직접PPA</td><td>기획 &mdash; 발전사업자 side</td></tr>
-              <tr><td class="area">뉴비즈</td><td>카나리 QA 진행</td></tr>
-              <tr><td class="area">뉴비즈</td><td>사용성 QA 계획서 작성</td></tr>
+              <tr><td class="area">뉴비즈</td><td>기획 &mdash; 가입 시 프로모션</td></tr>
+              <tr><td class="area">뉴비즈</td><td>사용성 QA 세부 기획 지원 / 계획서 작성</td></tr>
+              <tr><td class="area">오솔라 운영</td><td>운영 dev 대응 및 버그 개발 백로그 대응</td></tr>
+              <tr><td class="area">오솔라 운영 인수인계</td><td>개발 테스크 및 외부 연동기관 연결 인수인계</td></tr>
             </tbody>
           </table>
         </div>
@@ -371,7 +376,7 @@
 
 <script>
   var CURRENT_FILE = "2026-09-14.html";
-  fetch('./manifest.json').then(function(r){ return r.json(); }).then(function(list){
+  fetch('./manifest.json', {cache: 'no-store'}).then(function(r){ return r.json(); }).then(function(list){
     var nav = document.getElementById('history-list');
     nav.innerHTML = '';
     if (!list || !list.length) { nav.innerHTML = '<span class="history-empty">기록 없음</span>'; return; }
