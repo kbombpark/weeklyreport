@@ -12,7 +12,7 @@
 <body>
 <p id="msg">최신 리포트로 이동 중입니다&hellip;</p>
 <script>
-  fetch('./manifest.json').then(function(r){ return r.json(); }).then(function(list){
+  fetch('./manifest.json', {cache: 'no-store'}).then(function(r){ return r.json(); }).then(function(list){
     if (list && list.length) {
       location.replace('./' + list[0].file);
     } else {
@@ -24,4 +24,3 @@
 </script>
 </body>
 </html>
-
