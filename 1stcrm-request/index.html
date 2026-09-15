@@ -165,6 +165,57 @@
   }
   .note-card strong{ color:var(--ink); font-weight:600; }
 
+  .table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--surface);
+    min-width:420px;
+  }
+  thead th{
+    text-align:left;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    background:var(--surface-2);
+    padding:11px 16px;
+    border-bottom:1px solid var(--border);
+  }
+  tbody td{
+    padding:13px 16px;
+    border-bottom:1px solid var(--border);
+    vertical-align:top;
+    font-size:14.5px;
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.date{ color:var(--muted); font-size:13px; white-space:nowrap; font-family:'IBM Plex Mono', monospace; }
+  td.status{ white-space:nowrap; }
+  .pill{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:3px 10px 3px 8px; border-radius:999px; font-size:12.5px; font-weight:600;
+  }
+  .pill::before{ content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .pill.wait{ background:var(--surface-2); color:var(--muted); }
+  .pill.prog{ background:#E8F1FF; color:#0C56C2; }
+  .pill.done{ background:#E3F5EC; color:#137A4C; }
+  .pill.hold{ background:#FDF1E0; color:#9A6B14; }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .pill.prog{ background:#132846; color:#7FB0FF; }
+    :root:not([data-theme="light"]) .pill.done{ background:#123423; color:#4ADE94; }
+    :root:not([data-theme="light"]) .pill.hold{ background:#3A2B10; color:#E0A32E; }
+  }
+  :root[data-theme="dark"] .pill.prog{ background:#132846; color:#7FB0FF; }
+  :root[data-theme="dark"] .pill.done{ background:#123423; color:#4ADE94; }
+  :root[data-theme="dark"] .pill.hold{ background:#3A2B10; color:#E0A32E; }
+  .list-empty{ padding:24px 16px; text-align:center; color:var(--muted); font-size:13.5px; }
+
   footer{
     max-width:720px;
     padding:28px 0 40px;
@@ -227,6 +278,29 @@
     <div class="note-card">
       접수된 요청은 저희 내부 시스템으로 바로 전달되며, <strong>영업일 기준으로 순차 확인</strong>합니다. 긴급한 건은 기존 연락 채널로 함께 알려주세요.
     </div>
+
+    <section style="margin-top:36px;">
+      <h2 class="section-head">요청 처리 현황</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>날짜</th><th>요청사항</th><th>처리 상태</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="date">2026-09-15</td>
+              <td>테스트123</td>
+              <td class="status"><span class="pill wait">접수</span></td>
+            </tr>
+            <tr>
+              <td class="date">2026-09-15</td>
+              <td>DUR 확인(테스트)</td>
+              <td class="status"><span class="pill wait">접수</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </main>
 
   <footer>
