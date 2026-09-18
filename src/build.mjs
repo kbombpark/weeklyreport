@@ -103,15 +103,6 @@ for (const slug of slugs) {
   console.log(`${slug.padEnd(12)} ${entries.length}건  최신 ${entries[0]?.date ?? '-'}`);
 }
 
-// 입력 페이지가 브라우저에서 그대로 쓰는 자산 — 빌드 산출물과 항상 같은 버전이 나간다.
-const assetDir = join(OUT, 'assets');
-mkdirSync(assetDir, { recursive: true });
-writeFileSync(join(assetDir, 'theme.css'), css);
-writeFileSync(join(assetDir, 'logo-wordmark.svg'), wordmark);
-writeFileSync(join(assetDir, 'logo-symbol.svg'), symbol);
-copyFileSync(join(root, 'src/render.mjs'), join(assetDir, 'render.mjs'));
-copyFileSync(join(root, 'src/base-parse.mjs'), join(assetDir, 'base-parse.mjs'));
-
 // 담당자 입력 페이지 (내부용)
 const intakeDir = join(OUT, 'input');
 mkdirSync(intakeDir, { recursive: true });
