@@ -4,3 +4,8 @@ kind: 주간 보고
 docKind: 주간 리포트
 eyebrow: Weekly Report
 footerNote: 본 보고서는 정기적으로 갱신됩니다
+
+# 라크 연동
+lark:
+  project: "지란지교"      # Base "주간 보고 링크" 의 프로젝트 값
+  parentNode: HBgPw0rR0iQyRdkAY6WjRwzUp2b   # 위키 아카이브 하위 폴더

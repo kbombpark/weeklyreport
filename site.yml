@@ -1,0 +1,7 @@
+# 발행 대상
+baseUrl: https://kbombpark.github.io/weeklyreport
+larkDomain: https://ajpwabbi3651.jp.larksuite.com
+# Base "[전체]주간 리포트 아카이브"
+base:
+  token: C5w3bexAtaa7hAsA4btjvS8cpfg
+  table: tblmZzeaUq6QVTKP

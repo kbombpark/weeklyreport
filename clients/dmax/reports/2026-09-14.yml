@@ -1,0 +1,45 @@
+# dmax · 2026-09-14
+# 라크 위키 문서에서 자동 변환: AUZowMMbPiEGkNkBH10jtYZIpJe
+# 대외 보고 문체·태그·이월 대조는 /weekly-report 스킬로 다듬은 뒤 발행하세요.
+period: 2026.09.08 – 09.14
+asOf: 2026.09.14
+summary: >-
+  대시보드 커스텀 QA(v1.4.1, v1.4.2), 메타 연동 QA 반영, 카카오 모먼트 계정 연동을 완료했습니다. 이번 주는 대시보드 커스텀 QA를 이어가며 카카오 모먼트
+  계정 연동 QA와 광고 데이터 연동을 진행합니다.
+sections:
+  - type: table
+    title: 지난주 완료 산출물
+    rows:
+      - area: 대시보드
+        items:
+          - 대시보드 커스텀 QA 항목 반영 (v1.4.1, v1.4.2) — 개발 서버 배포
+        status:
+          text: 완료
+          tone: good
+      - area: 메타 연동
+        items:
+          - 메타 연동 QA 항목 반영 — 개발 서버 배포
+        status:
+          text: 완료
+          tone: good
+      - area: 카카오 모먼트
+        items:
+          - 카카오 모먼트 계정 연동 — 개발 서버 배포
+        status:
+          text: 완료
+          tone: good
+  - type: table
+    title: 이번 주 계획 (09.08 ~ 09.14)
+    columns:
+      - 작업 영역
+      - 내용
+    rows:
+      - area: 대시보드
+        items:
+          - 대시보드 커스텀 QA 항목 반영 (v1.4.1, v1.4.2)
+      - area: 카카오 모먼트
+        items:
+          - 카카오 모먼트 계정 연동 QA 항목 반영
+      - area: 카카오 모먼트
+        items:
+          - 카카오 모먼트 광고 데이터 연동

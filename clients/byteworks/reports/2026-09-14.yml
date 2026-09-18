@@ -1,0 +1,54 @@
+# byteworks · 2026-09-14
+# 라크 위키 문서에서 자동 변환: GomswDwkXiA4bmkBT2ijVutYpeb
+# 대외 보고 문체·태그·이월 대조는 /weekly-report 스킬로 다듬은 뒤 발행하세요.
+period: 2026.09.07 – 09.18
+asOf: 2026.09.15
+summary: >-
+  REC현물 이력 정리, 오솔라(뉴비즈) 청구 처리 및 사용성 QA 준비, 오솔라 운영 이슈 대응(13건 중 9건 완료)을 진행했습니다. 이번 주는 직접PPA 발전사업자 side
+  기획과 뉴비즈 가입 프로모션 기획, 사용성 QA 계획서 작성을 진행합니다.
+sections:
+  - type: table
+    title: 지난주 완료 산출물 (09.07 ~ 09.11)
+    columns:
+      - 작업 영역
+      - 내용
+    rows:
+      - area: REC현물
+        items:
+          - 기획 — 현물 이력
+      - area: 뉴비즈(오솔라)
+        items:
+          - 기획 — 오솔라 청구
+      - area: 뉴비즈
+        items:
+          - 사용성 QA 준비
+      - area: 오솔라 운영
+        items:
+          - REC 관련 수수료 등록 업무 진행
+      - area: 오솔라 운영
+        items:
+          - 대응 13건 — 9건 완료 / 3건 백로그화 / 1건 진행 중
+      - area: 오솔라 운영 인수인계
+        items:
+          - 오솔라 서비스 이용 흐름 및 retool 사용법 인수인계
+  - type: table
+    title: 이번 주 계획 (09.14 ~ 09.18)
+    columns:
+      - 작업 영역
+      - 내용
+    rows:
+      - area: 직접PPA
+        items:
+          - 기획 — 발전사업자 side
+      - area: 뉴비즈
+        items:
+          - 기획 — 가입 시 프로모션
+      - area: 뉴비즈
+        items:
+          - 사용성 QA 세부 기획 지원 / 계획서 작성
+      - area: 오솔라 운영
+        items:
+          - 운영 dev 대응 및 버그 개발 백로그 대응
+      - area: 오솔라 운영 인수인계
+        items:
+          - 개발 테스크 및 외부 연동기관 연결 인수인계

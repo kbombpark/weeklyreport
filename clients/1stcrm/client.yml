@@ -4,3 +4,8 @@ kind: 주간 보고
 docKind: 주간 리포트
 eyebrow: Weekly Report
 footerNote: 본 보고서는 매주 갱신됩니다
+
+# 라크 연동
+lark:
+  project: "1stCRM"      # Base "주간 보고 링크" 의 프로젝트 값
+  parentNode: UgBrwe5URitYHBkcOfPjRIdOpcc   # 위키 아카이브 하위 폴더
