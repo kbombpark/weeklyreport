@@ -9,3 +9,5 @@ footerNote: 본 보고서는 정기적으로 갱신됩니다
 lark:
   project: "지란지교"      # Base "주간 보고 링크" 의 프로젝트 값
   parentNode: HBgPw0rR0iQyRdkAY6WjRwzUp2b   # 위키 아카이브 하위 폴더
+  intakeTable: tblNtZVjH944xN4z    # Base "주간 보고 입력" 의 프로젝트 테이블
+  intakeForm: vewchGjNcs     # 담당자 입력 폼

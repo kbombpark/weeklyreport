@@ -5,3 +5,9 @@ larkDomain: https://ajpwabbi3651.jp.larksuite.com
 base:
   token: C5w3bexAtaa7hAsA4btjvS8cpfg
   table: tblmZzeaUq6QVTKP
+
+# Base "주간 보고 입력" (담당자 입력 양식) — 위키 아카이브 하위
+intake:
+  token: YhDabeYdoa2oqxsLkzIjzVh2pHv
+  wikiNode: TC2bwaV1XiTdXzk5WfQjDTsfped
+

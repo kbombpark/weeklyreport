@@ -9,3 +9,5 @@ footerNote: 본 보고서는 매주 갱신됩니다
 lark:
   project: "바이트웍스"      # Base "주간 보고 링크" 의 프로젝트 값
   parentNode: CSZPwW5cgiuqgHkDlOVjJDVSpte   # 위키 아카이브 하위 폴더
+  intakeTable: tbls1vcJrsBkyjjI    # Base "주간 보고 입력" 의 프로젝트 테이블
+  intakeForm: vewyJT9o5r     # 담당자 입력 폼
