@@ -1,0 +1,16 @@
+{
+  "name": "weeklyreport",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "new": "node src/new-report.mjs",
+    "serve": "python3 -m http.server 4321 --directory docs",
+    "sync": "node src/sync-lark.mjs",
+    "base": "node src/update-base.mjs",
+    "sync:base": "node src/sync-base.mjs"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
