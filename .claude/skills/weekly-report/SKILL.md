@@ -6,13 +6,17 @@ description: 라크 위키의 주간 보고 문서를 읽어 외부 클라이언
 # 주간 보고 발행
 
 Cofoundary가 클라이언트(대표/담당자)에게 매주 제출하는 보고 페이지를 발행한다.
-원본은 **라크 위키 아카이브의 회차 문서**이고, 담당자 작성 방식은 바꾸지 않는다.
+담당자 입력은 두 경로 중 하나로 들어온다. 어느 쪽이든 리포트 데이터로 모인다.
 
 ```
-라크 위키 문서  →  sync  →  reports/<날짜>.yml  →  build  →  docs/  →  Pages
-(담당자 작성)                    (다듬는 지점)                        ↓
-                                                        Base "주간 보고 링크" 갱신
+Base "주간 보고 입력"  →  sync-base  ┐
+                                       ├→ reports/<날짜>.yml → build → docs/ → Pages
+라크 위키 회차 문서    →  sync-lark  ┘      (다듬는 지점)                     ↓
+                                                            Base "주간 보고 링크" 갱신
 ```
+
+어느 경로인지 모르면 **Base 를 먼저 확인한다** (`sync-base <slug> --list`).
+비어 있으면 위키 문서 쪽이다.
 
 클라이언트 슬러그: `1stcrm` `byteworks` `dmax` `jiranjigyo`.
 각 `clients/<slug>/client.yml` 의 `lark.parentNode` 가 위키 폴더, `lark.project` 가
@@ -20,10 +24,15 @@ Base 레코드 키다.
 
 ## 절차
 
-1. **회차 확정.** 날짜가 불명확하면 `node src/sync-lark.mjs <slug> --list` 로 문서 목록을 본다.
-2. **변환.** `node src/sync-lark.mjs <slug> <YYYY-MM-DD>`
-   문서를 못 찾거나 같은 날짜가 여러 건이면 `--doc <노드토큰>` 으로 지정한다.
+1. **회차 확정.** 날짜가 불명확하면 `node src/sync-base.mjs <slug> --list` 또는
+   `node src/sync-lark.mjs <slug> --list` 로 입력된 회차를 본다.
+2. **변환.**
+   - Base 입력: `node src/sync-base.mjs <slug> <YYYY-MM-DD>`
+   - 위키 문서: `node src/sync-lark.mjs <slug> <YYYY-MM-DD>` (못 찾으면 `--doc <노드토큰>`)
+
    변환 요약에 `요약 없음` 이 뜨면 그대로 발행하지 말고 사용자에게 알린다.
+   `발행 제외 필드: 내부 메모 ...` 는 정상이다 — 그 내용은 데이터로 넘어오지 않으며,
+   궁금해도 Base 에서 따로 읽어 보고서에 싣지 않는다.
 3. **직전 회차와 대조.** `clients/<slug>/reports/` 의 이전 파일을 읽는다.
    이 대조가 이 스킬의 핵심이다 — 건너뛰면 그냥 변환기와 다를 게 없다.
 4. **대외 보고로 다듬는다.** 아래 편집 규칙.

@@ -11,3 +11,13 @@ lark:
   parentNode: YfXLwNL8YiHpfok8sT8j9R82pte   # 위키 아카이브 하위 폴더
   intakeTable: tblbiUItHDPEfMVv    # Base "주간 보고 입력" 의 프로젝트 테이블
   intakeForm: vewGQtTWaq     # 담당자 입력 폼
+
+# Base 입력 → 리포트 섹션 매핑
+intake:
+  sections:
+    - { field: 지난주 완료 산출물, type: table }
+    - { field: 진행 현황, type: text }
+    - { field: 요청주신 사항 확인, type: card }
+    - { field: 이번 주 계획, type: table, plan: true }
+    - { field: 요청사항, type: card }
+    - { field: 향후 방향, type: text }
