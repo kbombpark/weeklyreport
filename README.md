@@ -6,11 +6,15 @@ Cofoundary가 클라이언트에 제출하는 주간 보고 페이지의 소스�
 입력 경로는 두 가지이고 둘 다 같은 리포트 데이터로 모인다.
 
 ```
-Base "주간 보고 입력"  →  npm run sync:base  ┐
-                                              ├→ reports/<날짜>.yml → npm run build → docs/ → Pages
-라크 위키 회차 문서    →  npm run sync       ┘      (다듬는 지점)                              ↓
-                                                                        npm run base (Base 링크 갱신)
+웹 입력 페이지 /input/  →  브라우저에서 바로 변환 ┐
+Base "주간 보고 입력"   →  npm run sync:base      ├→ reports/<날짜>.yml → npm run build → Pages
+라크 위키 회차 문서     →  npm run sync           ┘      (다듬는 지점)                    ↓
+                                                                   npm run base (Base 링크 갱신)
 ```
+
+웹 입력 페이지는 같은 변환기(`base-parse.mjs`)와 렌더러(`render.mjs`)를 브라우저에서
+그대로 돌린다. 작성하면서 완성될 보고서를 바로 보고, 리포트 데이터를 복사하거나
+내려받아 저장소에 넣으면 된다.
 
 Base 는 필드가 정해진 입력 양식이라 변환이 정확하고, 위키 문서는 자유도가 높다.
 기존 문서 방식을 쓰던 프로젝트는 그대로 두고 옮겨갈 수 있다.
@@ -32,7 +36,7 @@ src/
   new-report.mjs        직전 회차에서 이월한 빈 초안 (라크 문서 없이 쓸 때)
   update-base.mjs       Base "주간 보고 링크" 갱신
 site.yml                발행 URL, 위키 도메인, Base 토큰
-src/render-intake.mjs   담당자용 웹 입력 페이지 (라크 폼 임베드)
+  render-intake.mjs     담당자용 웹 입력 페이지 (입력 + 실시간 미리보기)
 static/                 리포트와 무관한 페이지 (요청 접수 등)
 docs/                   빌드 산출물 — 직접 수정 금지
 templates/intake-fields.md    담당자용 Base 입력 양식 규칙
@@ -63,9 +67,7 @@ Claude Code에서는 `/weekly-report` 스킬이 위 과정을 대신한다. 변�
 
 - 위키 아카이브: `(임시)클라이언트 주간 리포트` (space `7602268973530369557`)
 - 입력 Base: `주간 보고 입력` — 프로젝트별 테이블 + 폼
-- 담당자 입력 페이지: `/input/<slug>/` — 위 폼을 임베드한 안내 페이지.
-  `client.yml` 의 `lark.intakeShareUrl` 에 폼 공유 링크를 넣으면 연결된다
-  (공유 링크는 Base UI 에서만 켤 수 있다).
+- 담당자 입력 페이지: `/input/<slug>/` — 웹에서 직접 작성한다. 라크 계정이 없어도 된다.
 - 발행 Base: `[전체]주간 리포트 아카이브` / 테이블 `주간 보고 링크`
 - 인증은 `lark-cli auth status` 의 user 신원을 사용한다.
 

@@ -16,6 +16,7 @@ const loadYaml = (p) => yaml.load(read(p)) ?? {};
 const ls = (dir, ext) =>
   existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith(ext)).sort() : [];
 
+const site = loadYaml(join(root, 'site.yml'));
 const css = read(join(root, 'src/assets/theme.css'));
 const wordmark = read(join(root, 'src/assets/logo-wordmark.svg')).trim();
 const symbol = read(join(root, 'src/assets/logo-symbol.svg')).trim();
@@ -98,9 +99,18 @@ for (const slug of slugs) {
   writeFileSync(join(outDir, 'index.html'), redirectPage(`${client.name} ${client.docKind ?? client.kind ?? '주간 리포트'}`));
 
   summary.push({ client, latest: entries[0], count: entries.length });
-  intake.push({ slug, client, ready: Boolean(client.lark?.intakeShareUrl) });
+  intake.push({ slug, client });
   console.log(`${slug.padEnd(12)} ${entries.length}건  최신 ${entries[0]?.date ?? '-'}`);
 }
+
+// 입력 페이지가 브라우저에서 그대로 쓰는 자산 — 빌드 산출물과 항상 같은 버전이 나간다.
+const assetDir = join(OUT, 'assets');
+mkdirSync(assetDir, { recursive: true });
+writeFileSync(join(assetDir, 'theme.css'), css);
+writeFileSync(join(assetDir, 'logo-wordmark.svg'), wordmark);
+writeFileSync(join(assetDir, 'logo-symbol.svg'), symbol);
+copyFileSync(join(root, 'src/render.mjs'), join(assetDir, 'render.mjs'));
+copyFileSync(join(root, 'src/base-parse.mjs'), join(assetDir, 'base-parse.mjs'));
 
 // 담당자 입력 페이지 (내부용)
 const intakeDir = join(OUT, 'input');
@@ -108,11 +118,10 @@ mkdirSync(intakeDir, { recursive: true });
 for (const { slug, client } of intake) {
   const dir = join(intakeDir, slug);
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'index.html'), renderIntake({ client, slug, css, wordmark, symbol }));
+  writeFileSync(join(dir, 'index.html'), renderIntake({ client, slug, css, wordmark, symbol, repo: site.repo }));
 }
 writeFileSync(join(intakeDir, 'index.html'), renderIntakeIndex({ entries: intake, css, wordmark, symbol }));
-const linked = intake.filter((i) => i.ready).length;
-console.log(`\ninput/ 입력 페이지 ${intake.length}건 (폼 연결 ${linked}건)`);
+console.log(`\ninput/ 담당자 입력 페이지 ${intake.length}건`);
 
 // 루트 목록 (내부용)
 const cards = summary
