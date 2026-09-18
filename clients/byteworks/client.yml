@@ -10,6 +10,7 @@ lark:
   project: "바이트웍스"      # Base "주간 보고 링크" 의 프로젝트 값
   parentNode: CSZPwW5cgiuqgHkDlOVjJDVSpte   # 위키 아카이브 하위 폴더
   intakeTable: tbls1vcJrsBkyjjI    # Base "주간 보고 입력" 의 프로젝트 테이블
+  intakeShareUrl: ""   # Base UI 에서 폼 공유를 켠 뒤 https://.../share/base/form/shr... 링크를 넣는다
   intakeForm: vewyJT9o5r     # 담당자 입력 폼
 
 # Base 입력 → 리포트 섹션 매핑

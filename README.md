@@ -32,6 +32,7 @@ src/
   new-report.mjs        직전 회차에서 이월한 빈 초안 (라크 문서 없이 쓸 때)
   update-base.mjs       Base "주간 보고 링크" 갱신
 site.yml                발행 URL, 위키 도메인, Base 토큰
+src/render-intake.mjs   담당자용 웹 입력 페이지 (라크 폼 임베드)
 static/                 리포트와 무관한 페이지 (요청 접수 등)
 docs/                   빌드 산출물 — 직접 수정 금지
 templates/intake-fields.md    담당자용 Base 입력 양식 규칙
@@ -62,6 +63,9 @@ Claude Code에서는 `/weekly-report` 스킬이 위 과정을 대신한다. 변�
 
 - 위키 아카이브: `(임시)클라이언트 주간 리포트` (space `7602268973530369557`)
 - 입력 Base: `주간 보고 입력` — 프로젝트별 테이블 + 폼
+- 담당자 입력 페이지: `/input/<slug>/` — 위 폼을 임베드한 안내 페이지.
+  `client.yml` 의 `lark.intakeShareUrl` 에 폼 공유 링크를 넣으면 연결된다
+  (공유 링크는 Base UI 에서만 켤 수 있다).
 - 발행 Base: `[전체]주간 리포트 아카이브` / 테이블 `주간 보고 링크`
 - 인증은 `lark-cli auth status` 의 user 신원을 사용한다.
 

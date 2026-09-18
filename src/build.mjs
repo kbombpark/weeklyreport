@@ -5,6 +5,7 @@ import { join, dirname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import yaml from 'js-yaml';
 import { renderReport } from './render.mjs';
+import { renderIntake, renderIntakeIndex } from './render-intake.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(root, 'docs');
@@ -58,6 +59,7 @@ const slugs = existsSync(CLIENTS)
   : [];
 
 const summary = [];
+const intake = [];
 
 for (const slug of slugs) {
   const dir = join(CLIENTS, slug);
@@ -96,8 +98,21 @@ for (const slug of slugs) {
   writeFileSync(join(outDir, 'index.html'), redirectPage(`${client.name} ${client.docKind ?? client.kind ?? '주간 리포트'}`));
 
   summary.push({ client, latest: entries[0], count: entries.length });
+  intake.push({ slug, client, ready: Boolean(client.lark?.intakeShareUrl) });
   console.log(`${slug.padEnd(12)} ${entries.length}건  최신 ${entries[0]?.date ?? '-'}`);
 }
+
+// 담당자 입력 페이지 (내부용)
+const intakeDir = join(OUT, 'input');
+mkdirSync(intakeDir, { recursive: true });
+for (const { slug, client } of intake) {
+  const dir = join(intakeDir, slug);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, 'index.html'), renderIntake({ client, slug, css, wordmark, symbol }));
+}
+writeFileSync(join(intakeDir, 'index.html'), renderIntakeIndex({ entries: intake, css, wordmark, symbol }));
+const linked = intake.filter((i) => i.ready).length;
+console.log(`\ninput/ 입력 페이지 ${intake.length}건 (폼 연결 ${linked}건)`);
 
 // 루트 목록 (내부용)
 const cards = summary
