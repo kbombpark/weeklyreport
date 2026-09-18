@@ -129,11 +129,18 @@ ${field('내부 메모 (대외 미게재)', { rows: 3, note: '<strong>보고서�
       <button id="btn-clear" class="btn subtle">작성 내용 비우기</button>
     </div>
     <p class="saved" id="saved">작성 중인 내용은 이 브라우저에 자동 저장됩니다.</p>
+    <div class="note-card" style="margin-top:18px;">
+      오른쪽 화면은 입력한 문장을 <strong>구조에만 맞춰 배치한 초안</strong>입니다.
+      실제로 대표님께 나가는 보고서는 발행 단계에서 지난 회차와 대조하고
+      <strong>대표 보고용 문체로 다시 씁니다</strong> — 작업 나열이 아니라
+      진척 판단과 결정 요청이 앞에 오도록. 그러니 여기서 문장을 다듬는 데
+      시간을 쓰지 마시고, 빠진 사실이 없는지만 봐주세요.
+    </div>
   </div>
 
   <div class="pane pane-preview">
     <div class="preview-head">
-      <span class="preview-title">미리보기</span>
+      <span class="preview-title">초안 · 문체 변환 전</span>
       <span class="preview-note" id="pv-note"></span>
     </div>
     <iframe id="preview" title="보고서 미리보기"></iframe>
