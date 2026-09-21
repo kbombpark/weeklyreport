@@ -1,9 +1,9 @@
 name: 드림인사이트
 display: 드림인사이트 프로젝트
-kind: 정기 보고
-docKind: 정기 보고
+kind: 주간 보고
+docKind: 주간 리포트
 eyebrow: Weekly Report
-footerNote: 본 보고서는 정기적으로 갱신됩니다
+footerNote: 본 보고서는 매주 갱신됩니다
 
 # 라크 연동
 lark:
