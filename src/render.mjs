@@ -133,7 +133,8 @@ ${ps}
 };
 
 export function renderReport({ client, report, file, css, wordmark, symbol }) {
-  const title = `${client.display ?? client.name} ${report.kind ?? client.kind ?? '주간 보고'}`;
+  // 보고서 제목은 클라이언트명 + 보고 종류로 통일한다. display("…프로젝트")는 상단 브랜드 영역에만 쓴다.
+  const title = `${client.name} ${report.kind ?? client.kind ?? '주간 보고'}`;
   const docTitle = `${client.name} ${client.docKind ?? client.kind ?? '주간 리포트'} · ${report.asOf ?? report.date}`;
 
   const stats = report.stats?.length
