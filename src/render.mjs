@@ -134,8 +134,11 @@ ${ps}
 
 export function renderReport({ client, report, file, css, wordmark, symbol }) {
   // 보고서 제목은 클라이언트명 + 보고 종류로 통일한다. display("…프로젝트")는 상단 브랜드 영역에만 쓴다.
-  const title = `${client.name} ${report.kind ?? client.kind ?? '주간 보고'}`;
-  const docTitle = `${client.name} ${client.docKind ?? client.kind ?? '주간 리포트'} · ${report.asOf ?? report.date}`;
+  // 주간 보고가 아닌 단발성 공유 문서는 report.title 로 제목을 통째로 바꿔 같은 양식에 쌓는다.
+  const title = report.title ?? `${client.name} ${report.kind ?? client.kind ?? '주간 보고'}`;
+  const docTitle = report.title
+    ? `${client.name} · ${report.title}`
+    : `${client.name} ${client.docKind ?? client.kind ?? '주간 리포트'} · ${report.asOf ?? report.date}`;
 
   const stats = report.stats?.length
     ? `
@@ -193,7 +196,7 @@ ${css}
 <div class="masthead">
   ${wordmark}
   <div class="brand-meta">
-    <p class="eyebrow">${esc(client.eyebrow ?? 'Weekly Report')}</p>
+    <p class="eyebrow">${esc(report.eyebrow ?? client.eyebrow ?? 'Weekly Report')}</p>
     <p class="client">${esc(client.display ?? client.name)}</p>
   </div>
 </div>
@@ -217,7 +220,7 @@ ${body}
 
     <footer>
       ${symbol}
-      <p class="note">${esc(client.footerNote ?? '본 보고서는 매주 갱신됩니다')} &middot; <strong>Cofoundary</strong> &times; ${esc(client.name)}</p>
+      <p class="note">${esc(report.footerNote ?? client.footerNote ?? '본 보고서는 매주 갱신됩니다')} &middot; <strong>Cofoundary</strong> &times; ${esc(client.name)}</p>
     </footer>
   </div>
 </div>
